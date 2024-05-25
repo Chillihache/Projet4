@@ -2,7 +2,7 @@ import os.path
 import json
 
 
-class Data:
+class JsonHelper:
 
     def __init__(self, data_directory):
 

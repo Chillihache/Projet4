@@ -1,29 +1,52 @@
 from views.view import View
 from models.player import Player
 from models.tournament import Tournament
-from models.data import Data
+from helpers.json_helper import JsonHelper
 
 class TournamentManager:
+    def __init__(self) -> None:
+        self.tournaments = []
 
-    @staticmethod
-    def create_new_tournament():
+    def create_new_tournament(self):
         View.warning_message()
         tournament_information = View.ask_new_tournament_information()
-        list_of_players = []
+        players = []
         for _ in range(tournament_information["number_of_players"]):
             player_to_add = TournamentManager.add_player_in_tournament()
             if player_to_add:
                 player_add = Player(player_to_add["Last name"], player_to_add["First name"],
                                     player_to_add["Date of birth"])
-                list_of_players.append(player_add)
+                players.append(player_add)
             else:
                 return
         tournament = Tournament(tournament_information["name"], tournament_information["location"],
                                 tournament_information["start_date"], tournament_information["end_date"],
-                                list_of_players, tournament_information["description"])
+                                players, tournament_information["description"])
         tournament.add_tournament_in_data()
         View.tournament_created()
 
+    def add_tournament_in_data(self):
+        players_names = []
+        for player in self.players:
+            player_name = [player.first_name + " " + player.last_name]
+            players_names.append(player_name)
+
+        data_tournament = {
+            "Name": self.name,
+            "Location": self.location,
+            "Start date": self.start_date,
+            "End date": self.end_date,
+            "Number of rounds": self.number_of_rounds,
+            "Current round": self.current_round,
+            "Rounds": self.rounds,
+            "Players": players_names,
+            "Description": self.description
+        }
+
+        "../data/data_tournaments"
+
+        data = Data("../data/data_tournaments")
+        data.add_in_data(data_tournament)
 
     @staticmethod
     def add_player_in_tournament():
