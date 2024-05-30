@@ -1,6 +1,4 @@
-import os.path
-import json
-from tools.data import Data
+
 
 class Tournament:
 
@@ -24,7 +22,7 @@ class Tournament:
 
     def consult_tournament_information(self):
 
-        return {"name": self.name, "location": self.location, "start_date": self.start_date, "end_date": self.end_date,
-                "number_of_rounds": self.number_of_rounds, "current_round": self.current_round,
-                "rounds": self.rounds, "players": self.players,
-                "description": self.description}
+        return {"Name": self.name, "Location": self.location, "Start_date": self.start_date, "End_date": self.end_date,
+                "Number_of_rounds": self.number_of_rounds, "Current_round": self.current_round,
+                "Rounds": self.rounds, "Players": self.players,
+                "Description": self.description}

@@ -1,35 +1,28 @@
 from views.view import View
 from models.player import Player
 from models.tournament import Tournament
-from helpers.json_helper import JsonHelper
 
 class TournamentManager:
     def __init__(self) -> None:
         self.tournaments = []
 
-    def create_new_tournament(self):
-        View.warning_message()
-        tournament_information = View.ask_new_tournament_information()
-        players = []
-        for _ in range(tournament_information["number_of_players"]):
-            player_to_add = TournamentManager.add_player_in_tournament()
-            if player_to_add:
-                player_add = Player(player_to_add["Last name"], player_to_add["First name"],
-                                    player_to_add["Date of birth"])
-                players.append(player_add)
-            else:
-                return
-        tournament = Tournament(tournament_information["name"], tournament_information["location"],
-                                tournament_information["start_date"], tournament_information["end_date"],
-                                players, tournament_information["description"])
-        tournament.add_tournament_in_data()
-        View.tournament_created()
 
-    def add_tournament_in_data(self):
+
+    def create_new_tournament(self, tournament_information, players):
+        if len(players) == tournament_information["number_of_player"]:
+            pass
+        else:
+            return None
+
+
+
+
+
+   """ def add_tournament_in_data(self):
         players_names = []
         for player in self.players:
             player_name = [player.first_name + " " + player.last_name]
-            players_names.append(player_name)
+            players_names.append(player_name)"""
 
         data_tournament = {
             "Name": self.name,
