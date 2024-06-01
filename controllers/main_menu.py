@@ -1,6 +1,9 @@
-from enum import IntEnum
 from views.main_menu_view import MainMenuView
-from models.players_manager import PlayersManager
+from enum import IntEnum
+from controllers.tournament_menu import TournamentMenu
+from controllers.report_menu import ReportMenu
+from controllers.players_controller import PlayersController
+
 
 class MainMenu:
     class Options(IntEnum):
@@ -11,9 +14,23 @@ class MainMenu:
         EXIT = 4
 
     def __init__(self):
-        self.player_manager = PlayersManager()
+        self.player_controller = PlayersController()
+        self.tournament_menu = TournamentMenu()
+        self.report_menu = ReportMenu()
+
+
 
     def main_loop(self):
         value = MainMenu.Options.DEFAULT
         while value != MainMenu.Options.EXIT:
+            match value:
+                case MainMenu.Options.ADD_PLAYER:
+                    self.player_controller.add_player()
+                case MainMenu.Options.TOURNAMENTS:
+                    self.tournament_menu.loop()
+                case MainMenu.Options.REPORTS:
+                    self.report_menu.loop()
+
             value = MainMenu.Options(int(MainMenuView.input_selection(MainMenu.Options)))
+
+

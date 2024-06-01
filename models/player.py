@@ -1,8 +1,3 @@
-import json
-import os.path
-from tools.data import Data
-
-
 class Player:
 
     def __init__(self, last_name, first_name, date_of_birth):

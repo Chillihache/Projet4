@@ -1,11 +1,10 @@
-class MainMenuView:
+class TournamentMenuView:
     @staticmethod
     def input_selection(options):
         while True:
-            print(f"Ajouter un nouveau joueur    - {int(options.ADD_PLAYER)} -\n"
-                  f"Gérer les tournois           - {int(options.TOURNAMENTS)} -\n"
-                  f"Générer un rapport           - {int(options.REPORTS)} -\n"
-                  f"Quitter le programme         - {int(options.EXIT)} -\n"
+            print(f"Créer un nouveau tournoi    - {int(options.CREATE)} -\n"
+                  f"Gérer un tournoi            - {int(options.MANAGE)} -\n"
+                  f"Retour au menu principal    - {int(options.EXIT)} -\n"
                   "")
             try:
                 choice = int(input("Votre choix : "))
@@ -18,9 +17,3 @@ class MainMenuView:
             except ValueError:
                 print("Veuillez entrer un nombre valide.\n"
                       "")
-
-
-
-
-
-
