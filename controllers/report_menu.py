@@ -1,6 +1,7 @@
 from views.report_menu_view import ReportMenuView
 from enum import IntEnum
-from controllers.player_controller import PlayerController
+from controllers.players_controller import PlayersController
+from controllers.tournaments_controller import TournamentsController
 
 
 
@@ -16,8 +17,8 @@ class ReportMenu:
 
     def __init__(self):
         self.report_menu_view = ReportMenuView()
-        self.player_controller = PlayerController()
-
+        self.player_controller = PlayersController()
+        self.tournaments_controller = TournamentsController()
 
     def loop(self):
         value = ReportMenu.Options.DEFAULT
@@ -26,11 +27,11 @@ class ReportMenu:
                 case ReportMenu.Options.PLAYERS:
                     self.player_controller.report_players()
                 case ReportMenu.Options.TOURNAMENTS:
-                    pass
+                    self.tournaments_controller.report_tournaments()
                 case ReportMenu.Options.TOURNAMENT_NAME_DATES:
-                    pass
+                    self.tournaments_controller.report_tournament_name_and_dates()
                 case ReportMenu.Options.TOURNAMENT_PLAYERS:
-                    pass
+                    self.tournaments_controller.report_tournament_players()
                 case ReportMenu.Options.TOURNAMENT_ROUNDS_MATCHS:
                     pass
 

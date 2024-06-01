@@ -1,6 +1,6 @@
 from enum import IntEnum
 from views.tournament_menu_view import TournamentMenuView
-from controllers.tournament_controller import TournamentController
+from controllers.tournaments_controller import TournamentsController
 
 class TournamentMenu:
     class Options(IntEnum):
@@ -10,7 +10,7 @@ class TournamentMenu:
         EXIT = 3
 
     def __init__(self):
-        self.tournament_controller = TournamentController()
+        self.tournament_controller = TournamentsController()
 
     def loop(self):
         value = TournamentMenu.Options.DEFAULT
@@ -19,5 +19,5 @@ class TournamentMenu:
                 case TournamentMenu.Options.CREATE:
                     self.tournament_controller.create_new_tournament()
                 case TournamentMenu.Options.MANAGE:
-                    pass
+                    self.tournament_controller.manage_tournament()
             value = TournamentMenu.Options(int(TournamentMenuView.input_selection(TournamentMenu.Options)))

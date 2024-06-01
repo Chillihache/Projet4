@@ -29,5 +29,10 @@ class CreateTournamentView:
     @staticmethod
     def error_message():
         print("Certains joueurs n'ont pas été trouvés, le tournoi n'a pas été créé.\n"
-              "Veuillez vérifier dans le rapport des joueurs et réessayer.\n"
+              "Veuillez vérifier dans le rapport des joueurs et créer les joueurs manquants.\n"
               "")
+
+    @staticmethod
+    def tournament_created():
+        print("Le tournoi a été créé avec succès.")
+        input("Cliquez sur entrer pour continuer.")

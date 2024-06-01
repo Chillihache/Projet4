@@ -1,77 +1,71 @@
-from views.view import View
-from models.player import Player
 from models.tournament import Tournament
-
-class TournamentManager:
-    def __init__(self) -> None:
-        self.tournaments = []
+from models.players_manager import PlayersManager
+from helpers.json_helper import JsonHelper
 
 
+class TournamentsManager:
+    def __init__(self):
+        self.json_helper = JsonHelper("data/data_tournaments.json")
+        self.players_manager = PlayersManager()
 
     def create_new_tournament(self, tournament_information, players):
-        if len(players) == tournament_information["number_of_player"]:
-            pass
-        else:
-            return None
+        tournament = Tournament(tournament_information["name"], tournament_information["location"],
+                                tournament_information["start_date"], tournament_information["end_date"],
+                                players, tournament_information["description"])
+        self.add_tournament_in_data(tournament)
 
-
-
-
-
-   """ def add_tournament_in_data(self):
-        players_names = []
-        for player in self.players:
-            player_name = [player.first_name + " " + player.last_name]
-            players_names.append(player_name)"""
+    def add_tournament_in_data(self, tournament):
+        players = []
+        for player in tournament.players:
+            players.append(player.first_name + " " + player.last_name)
 
         data_tournament = {
-            "Name": self.name,
-            "Location": self.location,
-            "Start date": self.start_date,
-            "End date": self.end_date,
-            "Number of rounds": self.number_of_rounds,
-            "Current round": self.current_round,
-            "Rounds": self.rounds,
-            "Players": players_names,
-            "Description": self.description
+            "Name": tournament.name,
+            "Location": tournament.location,
+            "Start date": tournament.start_date,
+            "End date": tournament.end_date,
+            "Number of rounds": tournament.number_of_rounds,
+            "Current round": tournament.current_round,
+            "Rounds": tournament.rounds,
+            "Players": players,
+            "Description": tournament.description
         }
+        self.json_helper.add_in_data(data_tournament)
 
-        "../data/data_tournaments"
+    def load_tournaments(self):
 
-        data = Data("../data/data_tournaments")
-        data.add_in_data(data_tournament)
-
-    @staticmethod
-    def add_player_in_tournament():
-
-        player_to_find = View.find_a_player()
-        data = Data("../data/data_players")
-        data_players = data.get_data()
-        player_found = Player.find_a_player(player_to_find, data_players)
-        if player_found:
-            View.player_found(player_found)
-            return player_found
-        else:
-            View.player_not_found(player_to_find)
+        data_tournaments = self.get_data_tournaments()
+        tournaments = []
+        if data_tournaments:
+            for tournament in data_tournaments:
+                players = []
+                for player in tournament["Players"]:
+                    players.append([player[player.find(" ")+1:], player[:player.find(" ")]])
+                players_found = self.players_manager.find_players(players)
+                tournaments.append(Tournament(tournament["Name"], tournament["Location"],
+                                              tournament["Start date"], tournament["End date"], players_found,
+                                              tournament["Description"]))
+            return tournaments
+        else :
             return None
 
-    @staticmethod
-    def consult_data_tournaments():
-        data = Data("../data/data_tournaments")
-        data_tournament = data.get_data()
-        View.show_tournaments_names_and_start_date(data_tournament)
+    def get_data_tournaments(self):
+        data_tournaments = self.json_helper.get_data()
+        return data_tournaments
+
+    def find_a_tournament(self, tournament_to_find):
+        tournaments = self.load_tournaments()
+        for tournament in tournaments:
+            if tournament.name.lower() == tournament_to_find.lower():
+                return tournament
+        return None
 
 
-    @staticmethod
-    def consult_tournament_information():
-        tournament_to_find = View.ask_tournament_to_find()
-        data = Data("../data/data_tournaments")
-        data_tournament = data.get_data()
-        for tournament in data_tournament:
-            if tournament["Name"] == tournament_to_find:
-                View.show_tournament_information(tournament)
-            else:
-                View.tournament_not_found()
+
+
+
+
+
 
 
 

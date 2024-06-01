@@ -20,7 +20,6 @@ class PlayersManager:
         }
         self.json_helper.add_in_data(data=data_player)
 
-
     def load_players(self):
         data_players = self.get_data_players()
         players = []
@@ -47,6 +46,8 @@ class PlayersManager:
             return players_found
         else:
             return None
+
+
 
 
 

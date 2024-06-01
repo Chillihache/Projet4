@@ -2,7 +2,7 @@ from views.main_menu_view import MainMenuView
 from enum import IntEnum
 from controllers.tournament_menu import TournamentMenu
 from controllers.report_menu import ReportMenu
-from controllers.player_controller import PlayerController
+from controllers.players_controller import PlayersController
 
 
 class MainMenu:
@@ -14,7 +14,7 @@ class MainMenu:
         EXIT = 4
 
     def __init__(self):
-        self.player_controller = PlayerController()
+        self.player_controller = PlayersController()
         self.tournament_menu = TournamentMenu()
         self.report_menu = ReportMenu()
 
