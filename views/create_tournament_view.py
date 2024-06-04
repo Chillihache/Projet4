@@ -9,8 +9,8 @@ class CreateTournamentView:
     def ask_new_tournament_information():
         name = input("Entrer le nom du tournoi :")
         location = input("Entrer le lieu du tournoi:")
-        start_date = input("Entrer la date de début du tournoi :")
-        end_date = input("Entrer la date de fin du tournoi :")
+        start_date = input("Entrer la date de début du tournoi au format JJ/MM/AAAA :")
+        end_date = input("Entrer la date de fin du tournoi au format JJ/MM/AAAA :")
         number_of_players = int(input("Entrer le nombre de participants :"))
         description = input("Entrer une description :")
         print("")
