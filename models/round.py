@@ -37,6 +37,10 @@ class Round:
             #       Break ou return si c'est checké dans une fonction
             # Rappel : On peut utiliser pop pour sortir un element d'une liste
 
+            # TODO: Respecter le pseudo-code
+            # hint: On préfére utiliser des joueurs que des structures moins précises -> Peut être rajouter les fonctions necessaires dans joueurs (pour les comparer, transformer, ...)
+            # Potentiellement, recommencer à zero les parties qui ne fonctionnent pas pour bien s'imprimer la logique et trouver les points manquants
+
             for match in tournament.rounds[current - 2].matchs:
                 self.players_and_scores.append(match[0])
                 self.players_and_scores.append(match[1])
