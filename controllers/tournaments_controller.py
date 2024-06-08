@@ -52,8 +52,8 @@ class TournamentsController:
 
     def manage_tournament(self):
         tournament = self.choose_a_tournament()
-        if tournament is not None:
-            if len(tournament.rounds) == tournament.current_round-1:
+        if tournament:
+            if len(tournament.rounds) == tournament.current_round - 1:
                 self.generate_new_round(tournament)
             else:
                 self.get_winners(tournament)

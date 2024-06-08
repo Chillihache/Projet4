@@ -72,7 +72,9 @@ class TournamentsManager:
                 return tournament
         return None
 
+    # TODO: A déplacer dans le tournoi
     def generate_round(self, tournament):
+        # Suppress tournament from csv -> update internal list of tournaments -> Recreate the same tournament in data
         self.json_helper.delete_tournament(tournament)
         round = Round(tournament.current_round, tournament.players)
         round.generate(tournament)
