@@ -47,7 +47,7 @@ class TournamentsController:
 
     def manage_tournament(self):
         tournament = self.choose_a_tournament()
-        self.rounds_manager =
+        # self.rounds_manager =
 
 
 

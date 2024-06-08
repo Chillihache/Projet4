@@ -13,6 +13,7 @@ class CreateTournamentView:
         end_date = input("Entrer la date de fin du tournoi :")
         number_of_players = int(input("Entrer le nombre de participants :"))
         description = input("Entrer une description :")
+        number_of_rounds = input("Entrez le nombre de rounds (laissez vide pour 4) : ")
         print("")
         return {"name": name, "location": location, "start_date": start_date, "end_date": end_date,
                 "number_of_players": number_of_players, "description": description}
