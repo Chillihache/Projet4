@@ -2,7 +2,7 @@
 
 class Tournament:
 
-    def __init__(self, name, location, start_date, end_date, players, description, number_of_rounds=4):
+    def __init__(self, name, location, start_date, end_date, players, description, number_of_rounds=4, current_round=1, rounds=None):
 
         self.name = name
         self.location = location
@@ -11,11 +11,15 @@ class Tournament:
         
         self.number_of_rounds = number_of_rounds
         
-        self.current_round = 1
+        self.current_round = current_round
         self.rounds = []
+        try:
+            for round in rounds:
+                self.rounds.append(round)
+        except:
+            TypeError
 
-        for round in range(number_of_rounds):
-            self.rounds.append(f"Round {round + 1}")
+
 
         self.players = players
         self.description = description

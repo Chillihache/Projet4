@@ -9,14 +9,15 @@ class PlayersManager:
     @staticmethod
     def create_new_player(new_player_information):
         new_player = Player(last_name=new_player_information[0], first_name=new_player_information[1],
-                            date_of_birth=new_player_information[2])
+                            date_of_birth=new_player_information[2], chess_code=new_player_information[3])
         return new_player
 
     def add_player_in_data(self, new_player):
         data_player = {
             "Last name": new_player.last_name,
             "First name": new_player.first_name,
-            "Date of birth": new_player.date_of_birth
+            "Date of birth": new_player.date_of_birth,
+            "Chess code": new_player.chess_code
         }
         self.json_helper.add_in_data(data=data_player)
 
@@ -25,7 +26,8 @@ class PlayersManager:
         players = []
         if data_players:
             for player in data_players:
-                players.append(Player(player["Last name"], player["First name"], player["Date of birth"]))
+                players.append(Player(player["Last name"], player["First name"], player["Date of birth"],
+                                      player["Chess code"]))
         return players
 
     def get_data_players(self):

@@ -8,6 +8,7 @@ class ReportPlayersView:
             f"Nom de famille : {player.last_name}\n"
             f"Prénom : {player.first_name}\n"
             f"Date de naissance : {player.date_of_birth}\n"
+            f"Identifiant national d'échecs : {player.chess_code}\n"
             ""
             )
         input("Cliquez sur entrer pour continuer.")

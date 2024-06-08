@@ -30,6 +30,6 @@ class ReportTournamentsView:
     def show_tournament_players(tournament):
         print("")
         for player in tournament.players:
-            print(player.first_name + " " + player.last_name)
+            print(f"{player.first_name} {player.last_name} ({player.chess_code})")
         print("")
         input("Cliquez sur entrer pour continuer.")
