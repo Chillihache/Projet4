@@ -9,14 +9,20 @@ class CreateTournamentView:
     def ask_new_tournament_information():
         name = input("Entrer le nom du tournoi :")
         location = input("Entrer le lieu du tournoi:")
-        start_date = input("Entrer la date de début du tournoi :")
-        end_date = input("Entrer la date de fin du tournoi :")
+        start_date = input("Entrer la date de début du tournoi au format JJ/MM/AAAA :")
+        end_date = input("Entrer la date de fin du tournoi au format JJ/MM/AAAA :")
+        number_of_rounds = input("Entrer le nombre de tours, cliquez sur entrer pour choisir 4 par défaut :")
+        if number_of_rounds == "":
+            number_of_rounds = 4
+        else:
+            number_of_rounds = int(number_of_rounds)
         number_of_players = int(input("Entrer le nombre de participants :"))
         description = input("Entrer une description :")
         number_of_rounds = input("Entrez le nombre de rounds (laissez vide pour 4) : ")
         print("")
         return {"name": name, "location": location, "start_date": start_date, "end_date": end_date,
-                "number_of_players": number_of_players, "description": description}
+                "number_of_players": number_of_players, "description": description,
+                "number_of_rounds": number_of_rounds}
 
     @staticmethod
     def ask_players_to_add(tournament_information):

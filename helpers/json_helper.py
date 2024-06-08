@@ -32,6 +32,21 @@ class JsonHelper:
             with open(self.data_directory, "w") as file:
                 json.dump([data], file, indent=4)
 
+    def delete_tournament(self, tournament_to_delete):
+
+        with open(self.data_directory, "r") as file:
+            existing_data = json.load(file)
+
+        new_data = []
+
+        for tournament in existing_data:
+            if tournament["Name"].lower() != tournament_to_delete.name.lower():
+                new_data.append(tournament)
+
+        with open(self.data_directory, "w") as file:
+            json.dump(new_data, file, indent=4)
+
+
     def data_directory_exists(self):
         data_directory = (self.data_directory[:self.data_directory.rfind("/")])
         if not os.path.exists(data_directory):

@@ -2,7 +2,10 @@ from models.tournaments_manager import TournamentsManager
 from views.create_tournament_view import CreateTournamentView
 from models.players_manager import PlayersManager
 from views.report_tournaments_view import ReportTournamentsView
-from models.rounds_manager import RoundsManager
+from views.manage_tournament_view import ManageTournamentView
+from helpers.json_helper import JsonHelper
+from models.round import Round
+
 
 class TournamentsController:
 
@@ -12,7 +15,9 @@ class TournamentsController:
         self.create_tournament_view = CreateTournamentView()
         self.player_manager = PlayersManager()
         self.report_tournaments_view = ReportTournamentsView()
-        self.rounds_manager = RoundsManager
+        self.manage_tournament_view = ManageTournamentView()
+
+
     def create_new_tournament(self):
         self.create_tournament_view.warning_message()
         tournament_information = self.create_tournament_view.ask_new_tournament_information()
@@ -47,7 +52,40 @@ class TournamentsController:
 
     def manage_tournament(self):
         tournament = self.choose_a_tournament()
-        # self.rounds_manager =
+        if tournament is not None:
+            if len(tournament.rounds) == tournament.current_round-1:
+                self.generate_new_round(tournament)
+            else:
+                self.get_winners(tournament)
+                self.tournaments_manager.close_round(tournament)
+
+        else:
+            self.manage_tournament_view.tournament_not_found()
+
+    def generate_new_round(self, tournament):
+
+            self.manage_tournament_view.generate_round(tournament.current_round)
+            round = self.tournaments_manager.generate_round(tournament)
+            self.manage_tournament_view.round_generated(tournament, round)
+
+    def get_winners(self, tournament):
+        choice_winners = []
+        for match in tournament.rounds[tournament.current_round-1].matchs:
+            choice = self.manage_tournament_view.ask_winner(match)
+            choice_winners.append(choice)
+        self.tournaments_manager.give_winners_points(tournament, choice_winners)
+        self.manage_tournament_view.show_winners(tournament)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
