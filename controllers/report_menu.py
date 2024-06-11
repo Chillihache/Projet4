@@ -33,6 +33,6 @@ class ReportMenu:
                 case ReportMenu.Options.TOURNAMENT_PLAYERS:
                     self.tournaments_controller.report_tournament_players()
                 case ReportMenu.Options.TOURNAMENT_ROUNDS_MATCHS:
-                    pass
+                    self.tournaments_controller.report_rounds_matchs()
 
             value = ReportMenu.Options(int(ReportMenuView.input_selection(ReportMenu.Options)))

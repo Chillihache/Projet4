@@ -12,10 +12,10 @@ class ManageTournamentView:
         print("")
 
     @staticmethod
-    def round_generated(tournament, round):
+    def round_generated(tournament):
         print(f"Le tour {tournament.current_round} a été généré. \n"
               "Voici les matchs pour ce tour :")
-        for match in round.matchs:
+        for match in tournament.rounds[tournament.current_round - 1].matchs:
             print(match)
         input("Cliquez sur entrer pour continuer.")
         print("")
@@ -37,6 +37,12 @@ class ManageTournamentView:
             print(match)
         input("Cliquez sur entrer pour continuer")
         print("")
+
+    @staticmethod
+    def tournament_closed():
+        print("Le tournoi est terminé ! \n"
+              "")
+        input("Cliquez sur entrer pour continuer.")
 
 
 

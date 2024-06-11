@@ -1,4 +1,5 @@
-
+from helpers.json_helper import JsonHelper
+from models.round import Round
 
 class Tournament:
 
@@ -23,10 +24,24 @@ class Tournament:
 
         self.players = players
         self.description = description
+        self.json_helper = JsonHelper("data\data_tournaments.json")
+        self.round = Round(self)
 
-    def consult_tournament_information(self):
+    def generate_round(self):
 
-        return {"Name": self.name, "Location": self.location, "Start_date": self.start_date, "End_date": self.end_date,
-                "Number_of_rounds": self.number_of_rounds, "Current_round": self.current_round,
-                "Rounds": self.rounds, "Players": self.players,
-                "Description": self.description}
+        from models.tournaments_manager import TournamentsManager
+        tournament_manager = TournamentsManager()
+
+        self.json_helper.delete_tournament(self)
+        self.round.generate()
+        self.rounds.append(self.round)
+        tournament_manager.add_tournament_in_data(self)
+        return round
+
+    def close_round(self):
+
+        from models.tournaments_manager import TournamentsManager
+        tournament_manager = TournamentsManager()
+        self.json_helper.delete_tournament(self)
+        self.current_round += 1
+        tournament_manager.add_tournament_in_data(self)

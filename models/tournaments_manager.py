@@ -48,7 +48,7 @@ class TournamentsManager:
                 for player in tournament["Players"]:
                     players.append([player["Last name"], player["First name"]])
                 for round in tournament["Rounds"]:
-                    round_to_add = Round(tournament["Current round"], players)
+                    round_to_add = Round(tournament)
                     round_to_add.matchs = round
                     rounds.append(round_to_add)
 
@@ -72,31 +72,7 @@ class TournamentsManager:
                 return tournament
         return None
 
-    # TODO: A déplacer dans le tournoi
-    def generate_round(self, tournament):
-        # Suppress tournament from csv -> update internal list of tournaments -> Recreate the same tournament in data
-        self.json_helper.delete_tournament(tournament)
-        round = Round(tournament.current_round, tournament.players)
-        round.generate(tournament)
-        tournament.rounds.append(round)
-        self.add_tournament_in_data(tournament)
-        return round
 
-    def give_winners_points(self, tournament, choice_winners):
-        for i in range(len(choice_winners)):
-            match choice_winners[i]:
-                case 1:
-                    tournament.rounds[tournament.current_round-1].matchs[i][0][1] += 1
-                case 2:
-                    tournament.rounds[tournament.current_round-1].matchs[i][1][1] += 1
-                case 3:
-                    tournament.rounds[tournament.current_round - 1].matchs[i][0][1] += 0.5
-                    tournament.rounds[tournament.current_round - 1].matchs[i][1][1] += 0.5
-
-    def close_round(self, tournament):
-        self.json_helper.delete_tournament(tournament)
-        tournament.current_round += 1
-        self.add_tournament_in_data(tournament)
 
 
 
