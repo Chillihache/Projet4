@@ -20,12 +20,10 @@ class Tournament:
         except:
             TypeError
 
-
-
         self.players = players
         self.description = description
         self.json_helper = JsonHelper("data\data_tournaments.json")
-        self.round = Round(self)
+
 
     def generate_round(self):
 
@@ -33,8 +31,9 @@ class Tournament:
         tournament_manager = TournamentsManager()
 
         self.json_helper.delete_tournament(self)
-        self.round.generate()
-        self.rounds.append(self.round)
+        round = Round(self)
+        round.generate()
+        self.rounds.append(round)
         tournament_manager.add_tournament_in_data(self)
         return round
 
@@ -45,3 +44,5 @@ class Tournament:
         self.json_helper.delete_tournament(self)
         self.current_round += 1
         tournament_manager.add_tournament_in_data(self)
+
+

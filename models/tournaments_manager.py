@@ -13,7 +13,7 @@ class TournamentsManager:
         tournament = Tournament(tournament_information["name"], tournament_information["location"],
                                 tournament_information["start_date"], tournament_information["end_date"],
                                 players, tournament_information["description"],
-                                number_of_rounds=["number_of_rounds"])
+                                number_of_rounds=tournament_information["number_of_rounds"])
         self.add_tournament_in_data(tournament)
 
     def add_tournament_in_data(self, tournament):
@@ -22,7 +22,8 @@ class TournamentsManager:
         for player in tournament.players:
             players.append({"Last name": player.last_name, "First name": player.first_name})
         for round in tournament.rounds:
-            rounds.append(round.matchs)
+            rounds.append({"Name": round.name, "Start date": round.start_date, "End date": round.end_date,
+                           "Matches": round.matchs})
 
         data_tournament = {
             "Name": tournament.name,
@@ -48,15 +49,16 @@ class TournamentsManager:
                 for player in tournament["Players"]:
                     players.append([player["Last name"], player["First name"]])
                 for round in tournament["Rounds"]:
-                    round_to_add = Round(tournament)
-                    round_to_add.matchs = round
+                    round_to_add = Round(tournament, name=round["Name"], start_date=round["Start date"],
+                                         end_date=round["End date"])
+                    round_to_add.matchs = round["Matches"]
                     rounds.append(round_to_add)
 
                 players_found = self.players_manager.find_players(players)
                 tournaments.append(Tournament(tournament["Name"], tournament["Location"],
                                               tournament["Start date"], tournament["End date"], players_found,
-                                              tournament["Description"], rounds=rounds,
-                                              current_round=tournament["Current round"]))
+                                              tournament["Description"], number_of_rounds=tournament["Number of rounds"],
+                                              rounds=rounds, current_round=tournament["Current round"]))
             return tournaments
         else:
             return None

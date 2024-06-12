@@ -27,18 +27,13 @@ class ReportTournamentsView:
             input("Cliquez sur entrer pour continuer")
 
     @staticmethod
-    def show_tournament_players(tournament):
-        print("")
-        for player in tournament.players:
-            print(f"{player.first_name} {player.last_name} ({player.chess_code})")
-        print("")
-        input("Cliquez sur entrer pour continuer.")
-
-    @staticmethod
     def show_tournament_rounds_matchs(tournament):
         print("")
         for i in range(len(tournament.rounds)):
-            print(f"Tour {i+1} :")
+            print(f"{tournament.rounds[i].name} \n"
+                  f"Date de début : {tournament.rounds[i].start_date} \n"
+                  f"Date de fin : {tournament.rounds[i].end_date}"
+                  )
             for match in tournament.rounds[i].matchs:
                 print(match)
             print("")

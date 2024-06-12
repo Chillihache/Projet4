@@ -3,6 +3,7 @@ from views.create_tournament_view import CreateTournamentView
 from models.players_manager import PlayersManager
 from views.report_tournaments_view import ReportTournamentsView
 from views.manage_tournament_view import ManageTournamentView
+from views.report_players_view import ReportPlayersView
 from models.round import Round
 
 
@@ -15,6 +16,7 @@ class TournamentsController:
         self.player_manager = PlayersManager()
         self.report_tournaments_view = ReportTournamentsView()
         self.manage_tournament_view = ManageTournamentView()
+        self.report_player_view = ReportPlayersView()
 
 
     def create_new_tournament(self):
@@ -47,7 +49,9 @@ class TournamentsController:
 
     def report_tournament_players(self):
         tournament = self.choose_a_tournament()
-        self.report_tournaments_view.show_tournament_players(tournament)
+        players = sorted(tournament.players,
+                         key=lambda player: (player.last_name.lower(), player.first_name.lower()))
+        self.report_player_view.show_data_players(players)
 
     def report_rounds_matchs(self):
         tournament = self.choose_a_tournament()
@@ -57,7 +61,7 @@ class TournamentsController:
         tournament = self.choose_a_tournament()
 
         if tournament:
-            if tournament.current_round < tournament.number_of_rounds:
+            if tournament.current_round <= tournament.number_of_rounds:
                 if len(tournament.rounds) == tournament.current_round - 1:
 
                     self.manage_tournament_view.generate_round(tournament.current_round)

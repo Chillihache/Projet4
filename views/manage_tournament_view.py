@@ -1,3 +1,5 @@
+import random
+
 class ManageTournamentView:
 
     @staticmethod
@@ -17,6 +19,7 @@ class ManageTournamentView:
               "Voici les matchs pour ce tour :")
         for match in tournament.rounds[tournament.current_round - 1].matchs:
             print(match)
+            print(f"{random.choice([match[0][0], match[1][0]])} jouera les blanc.")
         input("Cliquez sur entrer pour continuer.")
         print("")
 

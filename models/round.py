@@ -1,17 +1,23 @@
 from random import shuffle
 from helpers.json_helper import JsonHelper
+from datetime import datetime
+
 
 
 class Round:
 
-    def __init__(self, tournament):
+    def __init__(self, tournament, name="", start_date="", end_date=""):
+        self.name = name
+        self.start_date = start_date
+        self.end_date = end_date
         self.tournament = tournament
         self.players = []
         self.matchs = []
         self.json_helper = JsonHelper("data\data_tournaments.json")
 
     def generate(self):
-
+        self.name = f"Round {self.tournament.current_round}"
+        self.start_date = datetime.now().strftime("%Y-%m-%d %H:%M")
         if self.tournament.current_round == 1:
             for player in self.tournament.players:
                 self.players.append([player.first_name + " " + player.last_name, 0])
@@ -27,7 +33,7 @@ class Round:
             self.players.sort(key=lambda x: x[1], reverse=True)
             for _ in range(int(len(self.tournament.players) / 2)):
                 self.find_a_match(previous_matchs)
-                print(self.matchs)
+
 
     def find_a_match(self, previous_matchs):
 
@@ -61,3 +67,6 @@ class Round:
                 case 3:
                     self.tournament.rounds[self.tournament.current_round - 1].matchs[i][0][1] += 0.5
                     self.tournament.rounds[self.tournament.current_round - 1].matchs[i][1][1] += 0.5
+        self.tournament.rounds[self.tournament.current_round - 1].end_date = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+
