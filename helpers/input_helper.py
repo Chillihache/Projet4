@@ -22,7 +22,7 @@ class InputHelper:
     def check_chess_code(chess_code):
         while len(chess_code) != 7 or not (chess_code[:2].isalpha() and chess_code[2:].isdigit()):
             print("Ce code n'est pas valide.")
-            chess_code = input("Veuillez un code au format AB12345 : ")
+            chess_code = input("Veuillez entrer un code au format AB12345 : ")
         return chess_code.upper()
 
     @staticmethod
@@ -36,4 +36,3 @@ class InputHelper:
         while not number.isdigit() or not int(number) % 2 == 0 or int(number) == 0:
             number = input("Veuillez entrer un nombre pair : ")
         return int(number)
-

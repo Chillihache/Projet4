@@ -2,6 +2,7 @@ from enum import IntEnum
 from views.tournament_menu_view import TournamentMenuView
 from controllers.tournaments_controller import TournamentsController
 
+
 class TournamentMenu:
     class Options(IntEnum):
         DEFAULT = 0

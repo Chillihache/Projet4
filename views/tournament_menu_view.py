@@ -12,8 +12,8 @@ class TournamentMenuView:
                 if (choice in [item.value for item in options]) and (choice != 0):
                     return options(choice)
                 else:
-                    print("Choix invalide. Veuillez sélectionner une option valide.\n"
+                    print("Choix invalide. Veuillez sélectionner une option valide. \n"
                           "")
             except ValueError:
-                print("Veuillez entrer un nombre valide.\n"
+                print("Veuillez entrer un nombre valide. \n"
                       "")

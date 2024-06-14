@@ -23,7 +23,7 @@ class TournamentsManager:
             players.append({"Last name": player.last_name, "First name": player.first_name})
         for round in tournament.rounds:
             rounds.append({"Name": round.name, "Start date": round.start_date, "End date": round.end_date,
-                           "Matches": round.matchs})
+                           "Matches": round.matches})
 
         data_tournament = {
             "Name": tournament.name,
@@ -51,14 +51,15 @@ class TournamentsManager:
                 for round in tournament["Rounds"]:
                     round_to_add = Round(tournament, name=round["Name"], start_date=round["Start date"],
                                          end_date=round["End date"])
-                    round_to_add.matchs = round["Matches"]
+                    round_to_add.matches = round["Matches"]
                     rounds.append(round_to_add)
 
                 players_found = self.players_manager.find_players(players)
                 tournaments.append(Tournament(tournament["Name"], tournament["Location"],
                                               tournament["Start date"], tournament["End date"], players_found,
-                                              tournament["Description"], number_of_rounds=tournament["Number of rounds"],
-                                              rounds=rounds, current_round=tournament["Current round"]))
+                                              tournament["Description"],
+                                              number_of_rounds=tournament["Number of rounds"], rounds=rounds,
+                                              current_round=tournament["Current round"]))
             return tournaments
         else:
             return None
@@ -69,29 +70,8 @@ class TournamentsManager:
 
     def find_a_tournament(self, tournament_to_find):
         tournaments = self.load_tournaments()
-        for tournament in tournaments:
-            if tournament.name.lower() == tournament_to_find.lower():
-                return tournament
+        if tournaments:
+            for tournament in tournaments:
+                if tournament.name.lower() == tournament_to_find.lower():
+                    return tournament
         return None
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

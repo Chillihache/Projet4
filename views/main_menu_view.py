@@ -18,9 +18,3 @@ class MainMenuView:
             except ValueError:
                 print("Veuillez entrer un nombre valide.\n"
                       "")
-
-
-
-
-
-

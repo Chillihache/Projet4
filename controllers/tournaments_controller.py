@@ -18,7 +18,6 @@ class TournamentsController:
         self.manage_tournament_view = ManageTournamentView()
         self.report_player_view = ReportPlayersView()
 
-
     def create_new_tournament(self):
         self.create_tournament_view.warning_message()
         tournament_information = self.create_tournament_view.ask_new_tournament_information()
@@ -41,7 +40,10 @@ class TournamentsController:
 
     def report_tournaments(self):
         tournaments = self.load_tournaments()
-        self.report_tournaments_view.show_tournaments_list(tournaments)
+        if tournaments:
+            self.report_tournaments_view.show_tournaments_list(tournaments)
+        else:
+            self.report_tournaments_view.tournaments_empty()
 
     def report_tournament_name_and_dates(self):
         tournament = self.choose_a_tournament()
@@ -49,13 +51,19 @@ class TournamentsController:
 
     def report_tournament_players(self):
         tournament = self.choose_a_tournament()
-        players = sorted(tournament.players,
-                         key=lambda player: (player.last_name.lower(), player.first_name.lower()))
-        self.report_player_view.show_data_players(players)
+        if tournament:
+            players = sorted(tournament.players,
+                             key=lambda player: (player.last_name.lower(), player.first_name.lower()))
+            self.report_player_view.show_data_players(players)
+        else:
+            self.report_tournaments_view.show_tournament_name_dates(tournament)
 
-    def report_rounds_matchs(self):
+    def report_rounds_matches(self):
         tournament = self.choose_a_tournament()
-        self.report_tournaments_view.show_tournament_rounds_matchs(tournament)
+        if tournament:
+            self.report_tournaments_view.show_tournament_rounds_matches(tournament)
+        else:
+            self.report_tournaments_view.show_tournament_name_dates(tournament)
 
     def manage_tournament(self):
         tournament = self.choose_a_tournament()
@@ -80,30 +88,8 @@ class TournamentsController:
     def get_winners(self, tournament):
         round = Round(tournament)
         choice_winners = []
-        for match in tournament.rounds[tournament.current_round-1].matchs:
+        for match in tournament.rounds[tournament.current_round-1].matches:
             choice = self.manage_tournament_view.ask_winner(match)
             choice_winners.append(choice)
         round.give_winners_points(choice_winners)
         self.manage_tournament_view.show_winners(tournament)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

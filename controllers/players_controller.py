@@ -22,10 +22,3 @@ class PlayersController:
             self.report_players_view.show_data_players(players)
         else:
             self.report_players_view.empty_data_players()
-
-
-
-
-
-
-

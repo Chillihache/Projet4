@@ -18,8 +18,6 @@ class MainMenu:
         self.tournament_menu = TournamentMenu()
         self.report_menu = ReportMenu()
 
-
-
     def main_loop(self):
         value = MainMenu.Options.DEFAULT
         while value != MainMenu.Options.EXIT:
@@ -32,5 +30,3 @@ class MainMenu:
                     self.report_menu.loop()
 
             value = MainMenu.Options(int(MainMenuView.input_selection(MainMenu.Options)))
-
-

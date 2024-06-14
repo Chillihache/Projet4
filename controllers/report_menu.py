@@ -4,7 +4,6 @@ from controllers.players_controller import PlayersController
 from controllers.tournaments_controller import TournamentsController
 
 
-
 class ReportMenu:
     class Options(IntEnum):
         DEFAULT = 0
@@ -12,7 +11,7 @@ class ReportMenu:
         TOURNAMENTS = 2
         TOURNAMENT_NAME_DATES = 3
         TOURNAMENT_PLAYERS = 4
-        TOURNAMENT_ROUNDS_MATCHS = 5
+        TOURNAMENT_ROUNDS_MATCHES = 5
         EXIT = 6
 
     def __init__(self):
@@ -32,7 +31,7 @@ class ReportMenu:
                     self.tournaments_controller.report_tournament_name_and_dates()
                 case ReportMenu.Options.TOURNAMENT_PLAYERS:
                     self.tournaments_controller.report_tournament_players()
-                case ReportMenu.Options.TOURNAMENT_ROUNDS_MATCHS:
-                    self.tournaments_controller.report_rounds_matchs()
+                case ReportMenu.Options.TOURNAMENT_ROUNDS_MATCHES:
+                    self.tournaments_controller.report_rounds_matches()
 
             value = ReportMenu.Options(int(ReportMenuView.input_selection(ReportMenu.Options)))
