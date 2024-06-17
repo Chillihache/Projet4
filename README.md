@@ -38,7 +38,7 @@ Generate a report :
 Directory Composition
 -
 
-This application adheres to the MVC (Model-View-Controller architecture. It includes:
+This application adheres to the MVC (Model-View-Controller) architecture. It includes:
 - Models : Main objects
 - Views : Interacts with the user
 - Controllers : Bridges between models and views
