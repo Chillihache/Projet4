@@ -25,7 +25,7 @@ class Tournament:
         self.json_helper = JsonHelper("data/data_tournaments.json")
 
     def generate_round(self):
-
+        # Importing tournaments_manager within the method to avoid circular dependency
         from models.tournaments_manager import TournamentsManager
         tournament_manager = TournamentsManager()
 
